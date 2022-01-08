@@ -14,5 +14,6 @@ public class DangKiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dang_ki);
 //xuanrinaa
         //rin oi la rin
+        //hahaha
 }
 }
