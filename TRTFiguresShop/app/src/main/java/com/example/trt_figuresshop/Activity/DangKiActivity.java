@@ -13,5 +13,6 @@ public class DangKiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ki);
 //xxxxxuanrinxxx
+//        tuans ml
 }
 }
