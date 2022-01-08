@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ActionBar;
 import android.app.Notification;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -19,6 +20,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,6 +39,7 @@ import com.example.trt_figuresshop.Retrofit.API;
 import com.example.trt_figuresshop.Retrofit.RetrofitClient;
 import com.example.trt_figuresshop.Retrofit.Utils;
 import com.google.android.material.navigation.NavigationView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     API api;
     List<NewProduct> arrayNewProduct;
     NewProductAdapter newProductAdapter;
+    NotificationBadge notificationBadge;
+    FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +78,39 @@ public class MainActivity extends AppCompatActivity {
             ActionViewFlipper();
             getProductType();
             getNewProduct();
+            getEventClick();
         }else {
             Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void getEventClick() {
+        listViewmain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        Intent TrangChu = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(TrangChu);
+                        break;
+                    case 1:
+                        Intent OP = new Intent(getApplicationContext(),GundamActivity.class);
+                        OP.putExtra("loai",1 );
+                        startActivity(OP);
+                        break;
+                    case 2:
+                        Intent Gundam = new Intent(getApplicationContext(),GundamActivity.class);
+                        Gundam.putExtra("loai",2 );
+                        startActivity(Gundam);
+                        break;
+                    case 3:
+                        Intent other = new Intent(getApplicationContext(),GundamActivity.class);
+                        other.putExtra("loai",3);
+                        startActivity(other);
+                        break;
+                }
+            }
+        });
     }
 
     private void getNewProduct() {
@@ -153,6 +189,35 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerlayoutmain);
         arrayProductType = new ArrayList<>();
         arrayNewProduct = new ArrayList<>();
+        notificationBadge = findViewById(R.id.menu_sl);
+        frameLayout = findViewById(R.id.framechitietgiohang);
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent giohang = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(giohang);
+            }
+        });
+        if (Utils.arraygiohang == null){
+            Utils.arraygiohang = new ArrayList<>();
+        }else {
+            int totalItem = 0;
+            for (int i=0; i<Utils.arraygiohang.size();i++){
+                totalItem = totalItem + Utils.arraygiohang.get(i).getSoluong();
+            }
+            notificationBadge.setText(String.valueOf(totalItem));
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        int totalItem = 0;
+        for (int i=0; i<Utils.arraygiohang.size();i++){
+            totalItem = totalItem + Utils.arraygiohang.get(i).getSoluong();
+        }
+        notificationBadge.setText(String.valueOf(totalItem));
+        super.onResume();
     }
 
     private boolean isConnected(Context context) {

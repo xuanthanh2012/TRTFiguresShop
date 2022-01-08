@@ -1,11 +1,23 @@
 package com.example.trt_figuresshop.Model;
 
-public class NewProduct {
+import java.io.Serializable;
+
+public class NewProduct implements Serializable {
     int id;
     String tenfigures;
     String mota;
     String hinh;
-    int giafigure;
+    String giafigure;
+    int loai;
+
+
+    public int getLoai() {
+        return loai;
+    }
+
+    public void setLoai(int loai) {
+        this.loai = loai;
+    }
 
     public int getId() {
         return id;
@@ -39,11 +51,11 @@ public class NewProduct {
         this.hinh = hinh;
     }
 
-    public int getGiafigure() {
+    public String getGiafigure() {
         return giafigure;
     }
 
-    public void setGiafigure(int giafigure) {
+    public void setGiafigure(String giafigure) {
         this.giafigure = giafigure;
     }
 }

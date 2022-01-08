@@ -21,7 +21,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#CCDD8CFA"
-                app:title="TRT-Shop"></androidx.appcompat.widget.Toolbar>
+                app:title="TRT-Shop">
+                <FrameLayout
+                    android:id="@+id/framechitietgiohang"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="55dp"
+                    android:layout_height="?attr/actionBarSize">
+                    <com.nex3z.notificationbadge.NotificationBadge
+                        android:id="@+id/menu_sl"
+                        android:layout_gravity="top|right"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"/>
+                    <ImageView
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_baseline_shopping_cart_24"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"/>
+                </FrameLayout>
+            </androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper
                 android:id="@+id/viewflippermain"
@@ -46,8 +64,8 @@
                     android:id="@+id/recyview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>
@@ -60,6 +78,7 @@
 
             <ListView
                 android:id="@+id/listviewmain"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:divider="@android:color/transparent"
